@@ -8,7 +8,6 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 import seaborn.objects as so
 
-
 # importing the Data
 csv = pd.read_csv("TitanicData.csv")
 csv["Survived"].replace(to_replace=0, value=False, inplace=True)
@@ -21,7 +20,7 @@ csv['Surname'] = csv['Name'].str.split('.', expand=True)[0].str.split(',', expan
 csv['Name'] = csv['Name'].str.split('.', expand=True)[1]
 
 titleSurvived = csv[['Title', 'Survived', 'Pclass']].groupby('Title').apply(lambda x: (x['Survived']).sum())
-titleDied = csv[['Title', 'Survived', 'Pclass']].groupby('Title').apply(lambda x: (x['Survived']== False).sum())
+titleDied = csv[['Title', 'Survived', 'Pclass']].groupby('Title').apply(lambda x: (x['Survived'] == False).sum())
 pclass_title = csv[['Title', 'Pclass', 'Survived']].groupby(['Pclass', 'Title']).count()
 
 fig, axes = plt.subplots(nrows=3, ncols=2, squeeze=False, figsize=(18, 10))
@@ -33,9 +32,8 @@ my_colors_survived = [(x/len(titleDied), 0.75, 0.2) for x in range(len(titleSurv
 my_colors_died = [(0.75,x/len(titleDied), x/(len(titleDied))) for x in range(len(titleDied))]
 titleSurvived.plot.bar(label='', subplots=True, legend=False, ax=axes[0, 0], color = my_colors_survived, xlabel = '')
 axes[0, 0].set_title('Titel und Überlebt')
-titleDied.plot.bar(label = '', subplots = True, legend = False, ax = axes[0,1], xlabel = '',color =  my_colors_died)
-axes[0,1].set_title('Titel und Gestorben')
-
+titleDied.plot.bar(label='', subplots=True, legend=False, ax=axes[0, 1], xlabel='', color=my_colors_died)
+axes[0, 1].set_title('Titel und Gestorben')
 
 # Überlebende zu Fare
 survive_fare_survived = csv.groupby('Fare').apply(lambda x: pd.Series((x['Survived']).sum(), index=['Überlebt']))
@@ -49,9 +47,9 @@ survive_fare_died.plot(style=".", ax=axes[1, 0], legend=False, color="c", xlim=(
 axes[1, 0].set_title("Gestorben")
 
 # Fare to Age
-
+csv = csv[csv['Age'] > 9]
 fare_age = csv.groupby('Age').agg({'Fare': 'mean'})
-fare_age.plot(ax=axes[2, 0], legend=False, xlim=(10, 85))
+fare_age.plot(ax=axes[2, 0], legend=False)
 axes[2, 0].set_title("Verhältnis Alter/Fahrtpreis")
 
 # Female Male Survivor

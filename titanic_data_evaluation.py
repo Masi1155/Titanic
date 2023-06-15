@@ -8,6 +8,7 @@ import matplotlib.pyplot as plt
 import seaborn as sns
 import seaborn.objects as so
 
+
 # importing the Data
 csv = pd.read_csv("TitanicData.csv")
 csv["Survived"].replace(to_replace=0, value=False, inplace=True)
@@ -29,9 +30,13 @@ fig, axes = plt.subplots(nrows=3, ncols=2, squeeze=False, figsize=(18, 10))
 plt.subplots_adjust(wspace=0.2, hspace=0.8)
 
 # Title zu Überlebt zu Klasse
-titleSurvived.plot.bar(label='', subplots=True, legend=False, ax=axes[0, 0])
+
+my_colors_survived = [(x/len(titleDied), 0.75, x/(len(titleDied)*2)) for x in range(len(titleSurvived))]
+print(my_colors_survived)
+my_colors_died = [(0.75,x/len(titleDied), x/(len(titleDied)*2)) for x in range(len(titleDied))]
+titleSurvived.plot.bar(label='', subplots=True, legend=False, ax=axes[0, 0], color = my_colors_survived, xlabel = '')
 axes[0, 0].set_title('Titel und Überlebt')
-titleDied.plot.bar(label = '', subplots = True, legend = False, ax = axes[0,1])
+titleDied.plot.bar(label = '', subplots = True, legend = False, ax = axes[0,1], xlabel = '',color =  my_colors_died)
 axes[0,1].set_title('Titel und Gestorben')
 
 

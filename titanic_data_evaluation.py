@@ -47,4 +47,9 @@ fare_age = csv.groupby('Age').agg({'Fare': 'mean'})
 fare_age.plot(ax=axes[2, 0], legend=False, xlim=(10, 85))
 axes[2, 0].set_title("Verhältnis Alter/Fahrtpreis")
 
+# Female Male Survivor
+female_male_survivor = csv.groupby('Sex').apply(lambda x: pd.Series((x['Survived']).sum(), index=['Überlebt']))
+female_male_survivor.plot.pie(ax=axes[2, 1], legend=False, subplots=True, autopct="%.2f", label="")
+axes[2, 1].set_title("Anteil der überlebten Frauen/Männern")
+
 plt.show()

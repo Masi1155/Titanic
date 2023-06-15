@@ -37,4 +37,32 @@ axes[0, 1].set_title("Überlebt")
 survive_fare_died.plot(style=".", ax=axes[0, 0], legend=False, color="c", xlim=(-10, 520), ylim=(-1, 30))
 axes[0, 0].set_title("Gestorben")
 
-# plt.show()
+title = csv.groupby('Title').agg({'Title':'count'})
+#print(title)
+
+
+
+def get_class_title(elems):
+    titles = ["Capt", "Col", "Don", "Dr", "Jonkheer","Lady","Major","Master","Miss","Mlle","Mme","Mr","Mrs","Ms","Rev","Sir", "the Countess"]
+    res = {}
+
+    for title in titles:
+        if elems:
+            pass
+
+titleSurvived = csv[['Title','Survived', 'Pclass']].groupby('Title').apply(lambda x: (x ['Survived']).sum())
+pclass_title = csv[['Title','Pclass','Survived']].groupby(['Pclass', 'Title']).count()
+print(pclass_title)
+    #.apply(lambda x: pd.Series((x['Pclass']==1),index = ['First','Second','Third']))
+titleSurvived = csv.groupby('Title').agg({'Survived':'count','Pclass':'count'})
+titleSurvived['Total'] = title['Title']
+#print(titleSurvived)
+
+fig, axes = plt.subplots(nrows=3, ncols=2, squeeze= False)
+plt.subplots_adjust(wspace= 0.2, hspace=0.8)
+pclass_title.plot(label = '', subplots = True, legend = False, ax = axes[0,0])
+axes[0,0].set_title('Titel Klasse Überlebt Verteilung')
+
+
+
+plt.show()

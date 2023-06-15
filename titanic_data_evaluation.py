@@ -41,4 +41,10 @@ axes[1, 1].set_title("Überlebt")
 survive_fare_died.plot(style=".", ax=axes[1, 0], legend=False, color="c", xlim=(-10, 520), ylim=(-1, 30))
 axes[1, 0].set_title("Gestorben")
 
+# Fare to Age
+
+fare_age = csv.groupby('Age').agg({'Fare': 'mean'})
+fare_age.plot(ax=axes[2, 0], legend=False, xlim=(10, 85))
+axes[2, 0].set_title("Verhältnis Alter/Fahrtpreis")
+
 plt.show()

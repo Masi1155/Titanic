@@ -29,7 +29,6 @@ plt.subplots_adjust(wspace=0.2, hspace=0.8)
 # Title zu Überlebt zu Klasse
 
 my_colors_survived = [(x / len(titleDied), 0.75, x / (len(titleDied) * 2)) for x in range(len(titleSurvived))]
-print(my_colors_survived)
 my_colors_died = [(0.75, x / len(titleDied), x / (len(titleDied) * 2)) for x in range(len(titleDied))]
 titleSurvived.plot.bar(label='', subplots=True, legend=False, ax=axes[0, 0], color=my_colors_survived, xlabel='')
 axes[0, 0].set_title('Titel und Überlebt')
@@ -55,7 +54,7 @@ axes[2, 0].set_title("Verhältnis Alter/Fahrtpreis")
 
 # Female Male Survivor
 female_male_survivor = csv.groupby('Sex').apply(lambda x: pd.Series((x['Survived']).sum(), index=['Überlebt']))
-female_male_survivor.plot.pie(ax=axes[2, 1], legend=False, subplots=True, autopct="%.2f", label="")
+female_male_survivor.plot.pie(ax=axes[2, 1], legend=False, subplots=True, autopct="%.2f", ylabel='')
 axes[2, 1].set_title("Anteil der überlebten Frauen/Männern")
 
 plt.show()

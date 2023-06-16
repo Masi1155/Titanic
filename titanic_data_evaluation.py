@@ -57,12 +57,10 @@ female_male_survivor = csv.groupby('Sex').apply(lambda x: pd.Series((x['Survived
 female_male_survivor.plot.pie(ax=axes[2, 1], legend=False, subplots=True, autopct="%.2f", ylabel='')
 axes[2, 1].set_title("Anteil der überlebten Frauen/Männern")
 
-
 # fig1, axes1 = plt.subplots(nrows=1, ncols = 2)
 # zugestiegen = csv.groupby('Embarked').agg({'Embarked':'count'})
 # zugestiegen.rename(index = {'C':'Cherbourg', 'Q': 'Queenstown', 'S':'Southampton'}, inplace =True)
 # zugestiegen.plot.pie(subplots = True,ylabel = '', legend = False)
-
 
 
 plt.show()
